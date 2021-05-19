@@ -1,0 +1,6 @@
+# Default ignored files
+/estore/__pycache__/
+/store/__pycache__/
+/store/__pycache__/
+/.idea/
+/venv/
