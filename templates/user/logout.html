@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!--================login_part Area =================-->
+    <section class="login_part section_padding">
+        <div class="container" style="justify-content: center">
+            <div class="login_part_text text-center">
+                <div class="login_part_text_iner">
+                    <h2>You have been logged out</h2>
+                    <a class="btn_3" href={% url 'login' %}>LOG BACK IN</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================login_part end =================-->
+{% endblock content %}

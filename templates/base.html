@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="header-info-right">
                                         <ul>
-                                           <li><a href="login.html">My Account </a></li>
+                                           <li><a href={% url 'register' %}>My Account </a></li>
                                            <li><a href="product_list.html">Wish List  </a></li>
                                            <li><a href="cart.html">Shopping</a></li>
                                            <li><a href="cart.html">Cart</a></li>
@@ -144,7 +144,9 @@
                                                 <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
                                             </div>
                                         </li>
-                                       <li class="d-none d-lg-block"> <a href="#" class="btn header-btn">Sign in</a></li>
+                                        {% if user.is_authenticated == False %}
+                                            <li class="d-none d-lg-block"> <a class="btn header-btn" href={% url 'login' %}>Sign in</a></li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                                 <!-- Mobile Menu -->
@@ -160,6 +162,9 @@
         </header>
         {% if messages %}
             {% for message in messages %}
+                <div class="alert alert-{{ message.tag }}" role="alert">
+                {{ message }}
+                </div>
             {% endfor %}
         {% endif %}
         {% block content %}{% endblock %}
