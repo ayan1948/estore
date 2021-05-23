@@ -51,30 +51,25 @@
                                         <div class="flag">
                                             <img src={% static "img/icon/header_icon.png" %} alt="">
                                         </div>
-                                        <div class="select-this">
-                                            <form action="#">
-                                                <div class="select-itms">
-                                                    <select name="select" id="select1">
-                                                        <option value="">USA</option>
-                                                        <option value="">SPN</option>
-                                                        <option value="">CDA</option>
-                                                        <option value="">USD</option>
-                                                    </select>
-                                                </div>
-                                            </form>
-                                        </div>
                                         <ul class="contact-now">
                                             <li>+777 2345 7886</li>
                                         </ul>
                                     </div>
                                     <div class="header-info-right">
-                                        <ul>
-                                           <li><a href={% url 'register' %}>My Account </a></li>
-                                           <li><a href="product_list.html">Wish List  </a></li>
-                                           <li><a href="cart.html">Shopping</a></li>
-                                           <li><a href="cart.html">Cart</a></li>
-                                           <li><a href="checkout.html">Checkout</a></li>
-                                        </ul>
+                                        {% if user.is_authenticated %}
+                                            <ul>
+                                                <li><a href="{% url 'profile' %}">My Account </a></li>
+                                                <li><a href="cart.html">Cart</a></li>
+                                                <li><a href="checkout.html">Checkout</a></li>
+                                            </ul>
+                                        {% else %}
+                                            <ul>
+                                                <li><a href="{% url 'login' %}">My Account </a></li>
+                                                <li><a href="">Cart</a></li>
+                                                <li><a href="">Checkout</a></li>
+                                            </ul>
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +81,7 @@
                                 <!-- Logo -->
                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
                                     <div class="logo">
-                                      <a href="store/index.html"><img src={% static "img/logo/logo.png" %} alt=""></a>
+                                      <a href="store/index.html"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
@@ -145,7 +140,7 @@
                                             </div>
                                         </li>
                                         {% if user.is_authenticated == False %}
-                                            <li class="d-none d-lg-block"> <a class="btn header-btn" href={% url 'login' %}>Sign in</a></li>
+                                            <li class="d-none d-lg-block"> <a class="btn header-btn" href="{% url 'login' %}">Sign in</a></li>
                                         {% endif %}
                                     </ul>
                                 </div>
@@ -160,6 +155,49 @@
             </div>
             <!-- Header End -->
         </header>
+
+        <!-- slider Area Start-->
+        <div class="slider-area ">
+            <!-- Mobile Menu -->
+            {% if url == '' %}
+                <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static 'img/hero/h1_hero.jpg' %}">
+                    <div class="container">
+                        <div class="row d-flex align-items-center justify-content-between">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                                <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                                    <img src="{% static 'img/hero/hero_man.png' %}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                                <div class="hero__caption">
+                                    <span data-animation="fadeInRight" data-delay=".4s">60% Discount</span>
+                                    <h1 data-animation="fadeInRight" data-delay=".6s">Winter <br> Collection</h1>
+                                    <p data-animation="fadeInRight" data-delay=".8s">Best Cloth Collection By 2020!</p>
+                                    <!-- Hero-btn -->
+                                    <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                        <a href="industries.html" class="btn hero-btn">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="single-slider slider-height2 d-flex align-items-center" data-background="{% static 'img/hero/contact_hero.jpg' %}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="hero-cap text-center">
+                                    <h2>Elements</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {%  endif %}
+        </div>
+        <!-- slider Area End-->
+
         {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tag }}" role="alert">
@@ -179,7 +217,7 @@
                                 <div class="single-footer-caption mb-30">
                                      <!-- logo -->
                                     <div class="footer-logo">
-                                        <a href="store/index.html"><img src={% static "assets/img/logo/logo2_footer.png" %} alt=""></a>
+                                        <a href="store/index.html"><img src="{% static 'assets/img/logo/logo2_footer.png' %}" alt=""></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">

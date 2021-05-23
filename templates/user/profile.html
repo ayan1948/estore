@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="col-lg-8 col-md-8">
+        <h3 class="mb-30">Form Element</h3>
+        <form action="#">
+            <div class="mt-10">
+                <input type="text" name="first_name" placeholder="First Name" required="" class="single-input">
+            </div>
+            <div class="mt-10">
+                <input type="text" name="last_name" placeholder="Last Name" required="" class="single-input">
+            </div>
+            <div class="mt-10">
+                <input type="text" id="{{ form.username.id_for_label }}" name="{{ form.username.id_for_label }}" placeholder="{{ user.username }}" class="single-input">
+            </div>
+            <div class="mt-10">
+                <input type="email" id="{{ form.username.id_for_label }}" name="{{ form.email.id_for_label }}" placeholder="{{ user.email }}" class="single-input">
+            </div>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
+                <input type="text" name="address" placeholder="Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Address'" required="" class="single-input">
+            </div>
+        </form>
+    </div>
+{% endblock content %}
