@@ -1,2 +1,2 @@
 # estore
-WIP Django based online retail
+WIP Django based online retail store.
