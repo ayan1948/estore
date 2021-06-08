@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
     <section class="product_list section_padding">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="product_sidebar">
                         <div class="single_sedebar">
                             <form action="#">
@@ -36,79 +36,27 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="product_list">
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product6.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Cervical pillow for airplane
-                                    car office nap pillow</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product2.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Geometric striped flower home classy decor</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product5.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Foam filling cotton slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product6.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product1.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product4.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Sleeping orthopedic sciatica Back Hip Joint Pain relief</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product5.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Memory foam filling cotton Slow rebound pillows</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product3.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Sleeping orthopedic sciatica Back Hip Joint Pain relief</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product2.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Geometric striped flower home classy decor</a> </h3>
-                                    <p>From $5</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="single_product_item">
-                                    <img src={% static "img/categori/product1.png" %} alt="" class="img-fluid">
-                                    <h3> <a href="single-product.html">Geometric striped flower home classy decor</a> </h3>
-                                    <p>From $5</p>
-                                </div>
+                        <div class="col-lg-6 col-sm-6">
+                            <div class="media single_product_item">
+                                <img class="mr-3" src="..." alt="Generic placeholder image">
+                            {% for product in products %}
+                                <a class="media-body" href="{% url 'product-specific' kind=product.category specific=product.id%}">
+                                    <div class="article-metadata">
+                                        <a class="mr-2" href="#">{{ product.title }}</a>
+                                        <small class="text-muted">Processor: {{ product.processor }},
+                                            Ram: {{ product.ram }} GB
+                                            Storage: {{ product.storage }} GB
+                                            Operating System: {{ product.OS }}
+                                            Screen: {{ product.screen }} inches
+                                            Color: {{ product.color }}
+                                        </small>
+                                    </div>
+                                    <h2><a class="article-title" href="{% url 'pro' post.id %}">{{ post.title }}</a></h2>
+                                    <p class="article-content">{{ post.content }}</p>
+                                </a>
+                             {% endfor %}
                             </div>
                         </div>
                         <div class="load_more_btn text-center">

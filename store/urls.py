@@ -1,7 +1,9 @@
 from django.urls import path
-from . import views
+from .views import home, all_products, product_type, product_detail
 
 urlpatterns = [
-    path('', views.home, name='store-home'),
-    path('about/', views.about, name='store-about'),
+    path('', home, name='store-home'),
+    path('products/all/', all_products, name='all-products'),
+    path('products/<kind>/', product_type, name='product-types'),
+    path('products/<kind>/<int:specific>/', product_detail, name='product-specific'),
 ]
