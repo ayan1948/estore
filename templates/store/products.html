@@ -39,25 +39,24 @@
                 <div class="col-md-9">
                     <div class="product_list">
                         <div class="col-lg-6 col-sm-6">
-                            <div class="media single_product_item">
-                                <img class="mr-3" src="..." alt="Generic placeholder image">
-                            {% for product in products %}
-                                <a class="media-body" href="{% url 'product-specific' kind=product.category specific=product.id%}">
-                                    <div class="article-metadata">
-                                        <a class="mr-2" href="#">{{ product.title }}</a>
-                                        <small class="text-muted">Processor: {{ product.processor }},
-                                            Ram: {{ product.ram }} GB
-                                            Storage: {{ product.storage }} GB
-                                            Operating System: {{ product.OS }}
-                                            Screen: {{ product.screen }} inches
+                            {% for product in object_list %}
+                                <a class="media single_product_item" href="{{ product.get_absolute_url }}">
+                                    <img class="mr-3" src="{{ product.image.url }}" alt="Generic placeholder image">
+                                    <a class="media-body">
+                                        <div class="article-metadata">
+                                            <a class="mr-2" href="#">{{ product.title }}</a>
+                                        </div>
+                                        <h2>{{ product.title }}</h2>
+                                        <p class="article-content">Processor: {{ product.processor }}
+                                            Ram: {{ product.ram }} GB,
+                                            Storage: {{ product.storage }} GB,
+                                            Operating System: {{ product.OS }},
+                                            Screen: {{ product.screen }} inches,
                                             Color: {{ product.color }}
-                                        </small>
-                                    </div>
-                                    <h2><a class="article-title" href="{% url 'pro' post.id %}">{{ post.title }}</a></h2>
-                                    <p class="article-content">{{ post.content }}</p>
+                                        </p>
+                                    </a>
                                 </a>
-                             {% endfor %}
-                            </div>
+                            {% endfor %}
                         </div>
                         <div class="load_more_btn text-center">
                             <a href="#" class="btn_3">Load More</a>

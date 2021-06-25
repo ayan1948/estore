@@ -57,18 +57,18 @@
                                     <div class="header-info-right">
                                         {% if user.is_authenticated %}
                                             <ul>
-                                                <li><a href="{% url 'profile' %}">My Account </a></li>
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
+                                                <li><a href="{% url 'profile' %}">My Account</a></li>
+                                                <li><a href="#">Cart</a></li>
+                                                <li><a href="#">Checkout</a></li>
+                                            <li><a href="#">Logout</a></li>
                                             </ul>
                                         {% else %}
                                             <ul>
-                                                <li><a href="{% url 'login' %}">My Account </a></li>
-                                                <li><a href="">Cart</a></li>
-                                                <li><a href="">Checkout</a></li>
+                                                <li><a href="{% url 'login' %}">Login In</a></li>
+                                                <li><a href="#">Cart</a></li>
+                                                <li><a href="#">Checkout</a></li>
                                             </ul>
                                         {% endif %}
-
                                     </div>
                                 </div>
                             </div>
@@ -88,32 +88,9 @@
                                     <div class="main-menu f-right d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li><a href="store/index.html">Home</a></li>
-                                                <li><a href="store/products.html">Catagori</a></li>
-                                                <li class="hot"><a href="#">Latest</a>
-                                                    <ul class="submenu">
-                                                        <li><a href="product_list.html"> Product list</a></li>
-                                                        <li><a href="single-product.html"> Product Details</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="blog.html">Blog</a>
-                                                    <ul class="submenu">
-                                                        <li><a href="blog.html">Blog</a></li>
-                                                        <li><a href="single-blog.html">Blog Details</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="#">Pages</a>
-                                                    <ul class="submenu">
-                                                        <li><a href="login.html">Login</a></li>
-                                                        <li><a href="cart.html">Card</a></li>
-                                                        <li><a href="elements.html">Element</a></li>
-                                                        <li><a href="about.html">About</a></li>
-                                                        <li><a href="confirmation.html">Confirmation</a></li>
-                                                        <li><a href="cart.html">Shopping Cart</a></li>
-                                                        <li><a href="checkout.html">Product Checkout</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="contact.html">Contact</a></li>
+                                                <li><a href="#">Laptops</a></li>
+                                                <li><a href="#">Mobiles</a></li>
+                                                <li><a href="#">Accessories</a></li>
                                             </ul>
                                         </nav>
                                     </div>
