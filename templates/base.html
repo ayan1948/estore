@@ -88,9 +88,9 @@
                                     <div class="main-menu f-right d-none d-lg-block">
                                         <nav>
                                             <ul id="navigation">
-                                                <li><a href="#">Laptops</a></li>
-                                                <li><a href="#">Mobiles</a></li>
-                                                <li><a href="#">Accessories</a></li>
+                                                <li><a href="{% url 'product-types' category='L' %}">Laptops</a></li>
+                                                <li><a href="{% url 'product-types' category='S' %}">Mobiles</a></li>
+                                                <li><a href="{% url 'product-types' category='A' %}">Accessories</a></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -177,8 +177,8 @@
         {% if messages %}
             {% for message in messages %}
                 <div class="container">
-                    <div class="alert alert-success" role="alert">
-                    {{ message }}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
                     </div>
                 </div>
             {% endfor %}

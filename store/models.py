@@ -43,9 +43,19 @@ class Product(models.Model):
             'slug': self.slug
         })
 
-    def get_add_to_cart(self):
+    def get_add_to_cart_url(self):
         return reverse("add-to-cart", kwargs={
             'slug': self.slug
+        })
+
+    def remove_from_cart_url(self):
+        return reverse("remove-from-cart", kwargs={
+            'slug': self.slug
+        })
+
+    def get_category(self):
+        return reverse("product-types", kwargs={
+            'kind': self.category
         })
 
     def __str__(self):
