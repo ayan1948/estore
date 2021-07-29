@@ -20,16 +20,11 @@
                         </p>
                         <div class="card_area">
                             <div class="product_count_area">
-                                <p>Quantity</p>
-                                <div class="product_count d-inline-block">
-                                    <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                    <input class="product_count_item input-number" type="text" value="1" min="0" max="10">
-                                    <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
-                                </div>
+                                <p>Price: {{ object.price }}</p>
                             </div>
-                            <p>Price: {{ object.price }}</p>
                             <div class="add_to_cart">
                                 <a href="{{ object.get_add_to_cart_url }}" class="btn_3">add to cart</a>
+                                <a href="{{ object.remove_from_cart_url }}" class="btn_3">Remove from cart</a>
                             </div>
                         </div>
                     </div>

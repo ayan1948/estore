@@ -1,10 +1,11 @@
+{% load cart_template_tags %}
 {% load static %}
 <!doctype html>
 <html class="no-js" lang="zxx">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>eCommerce HTML-5 Template </title>
+        <title>Borthakur's Agency</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href={% static "img/favicon.ico" %}>
@@ -48,7 +49,7 @@
                                 <div class="row d-flex justify-content-between align-items-center">
                                     <div class="header-info-left d-flex">
                                         <div class="flag">
-                                            <img src={% static "img/icon/header_icon.png" %} alt="">
+                                            <img src={% static "img/icon/header_icon.png" %}>
                                         </div>
                                         <ul class="contact-now">
                                             <li>+777 2345 7886</li>
@@ -57,16 +58,14 @@
                                     <div class="header-info-right">
                                         {% if user.is_authenticated %}
                                             <ul>
-                                                <li><a href="{% url 'profile' %}">My Account</a></li>
-                                                <li><a href="#">Cart</a></li>
-                                                <li><a href="#">Checkout</a></li>
+                                                <li><a href="{% url 'My Account' %}">My Account</a></li>
+                                                <li><a href="{% url 'logout' %}">Logout</a></li>
                                             <li><a href="#">Logout</a></li>
                                             </ul>
                                         {% else %}
                                             <ul>
                                                 <li><a href="{% url 'login' %}">Login In</a></li>
-                                                <li><a href="#">Cart</a></li>
-                                                <li><a href="#">Checkout</a></li>
+                                                <li><a href="{% url 'register' %}">Sign Up</a></li>
                                             </ul>
                                         {% endif %}
                                     </div>
@@ -98,26 +97,18 @@
                                 <div class="col-xl-5 col-lg-3 col-md-3 col-sm-3 fix-card">
                                     <ul class="header-right f-right d-none d-lg-block d-flex justify-content-between">
                                         <li class="d-none d-xl-block">
-                                            <div class="form-box f-right ">
+                                            <div class="search-anm form-box f-right">
                                                 <input type="text" name="Search" placeholder="Search products">
                                                 <div class="search-icon">
                                                     <i class="fas fa-search special-tag"></i>
                                                 </div>
                                             </div>
                                          </li>
-                                        <li class=" d-none d-xl-block">
-                                            <div class="favorit-items">
-                                                <i class="far fa-heart"></i>
-                                            </div>
-                                        </li>
                                         <li>
                                             <div class="shopping-card">
-                                                <a href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                                                <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
                                             </div>
                                         </li>
-                                        {% if user.is_authenticated == False %}
-                                            <li class="d-none d-lg-block"> <a class="btn header-btn" href="{% url 'login' %}">Sign in</a></li>
-                                        {% endif %}
                                     </ul>
                                 </div>
                                 <!-- Mobile Menu -->

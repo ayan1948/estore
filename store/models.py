@@ -5,6 +5,7 @@ from PIL import Image
 from django.shortcuts import reverse
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from users.models import ShippingAddress
 
 CATEGORY_CHOICES = (
     ('L', 'Laptop'),
@@ -28,7 +29,7 @@ class Product(models.Model):
     frontcamera = models.CharField(max_length=10, blank=True)
     backcamera = models.CharField(max_length=10, blank=True)
     specifications = models.TextField(blank=True)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, blank=True)
     image = models.ImageField(default='default.jpg', upload_to='product_images')
 
     def save(self):
@@ -51,11 +52,6 @@ class Product(models.Model):
     def remove_from_cart_url(self):
         return reverse("remove-from-cart", kwargs={
             'slug': self.slug
-        })
-
-    def get_category(self):
-        return reverse("product-types", kwargs={
-            'kind': self.category
         })
 
     def __str__(self):
@@ -82,18 +78,31 @@ def pre_save_post_receiver(sender, instance, *args, **kwargs):
 pre_save.connect(pre_save_post_receiver, sender=Product)
 
 
-class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    items = models.ManyToManyField
-    ordered_date = models.DateTimeField()
-    is_ordered = models.BooleanField(default=False)
-
-
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
     item = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     is_ordered = models.BooleanField(default=False)
 
+    def get_total_item_price(self):
+        return self.quantity * self.item.price
+
+    def get_final_price(self):
+        return self.get_total_item_price()
+
     def __str__(self):
         return f"{self.quantity} of {self.item.title}"
+
+
+class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    items = models.ManyToManyField(OrderItem)
+    ordered_date = models.DateTimeField()
+    is_ordered = models.BooleanField(default=False)
+    shipping_address = models.ForeignKey(ShippingAddress, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def get_total(self):
+        total = 0
+        for item in self.items.all():
+            total += item.get_final_price()
+        return total
