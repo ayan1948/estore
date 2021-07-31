@@ -17,7 +17,7 @@
             <link rel="stylesheet" href={% static "css/slicknav.css" %}>
             <link rel="stylesheet" href={% static "css/slicknav.css" %}>
             <link rel="stylesheet" href={% static "css/magnific-popup.css" %}>
-            <link rel="stylesheet" href={% static "css/fontawesome-all.min.css" %}>
+            <link rel="stylesheet" href={% static "css/all.css" %}>
             <link rel="stylesheet" href={% static "css/themify-icons.css" %}>
             <link rel="stylesheet" href={% static "css/slick.css" %}>
             <link rel="stylesheet" href={% static "css/nice-select.css" %}>
@@ -58,13 +58,12 @@
                                     <div class="header-info-right">
                                         {% if user.is_authenticated %}
                                             <ul>
-                                                <li><a href="{% url 'My Account' %}">My Account</a></li>
+                                                <li><a href="{% url 'profile' %}">My Account</a></li>
                                                 <li><a href="{% url 'logout' %}">Logout</a></li>
-                                            <li><a href="#">Logout</a></li>
                                             </ul>
                                         {% else %}
                                             <ul>
-                                                <li><a href="{% url 'login' %}">Login In</a></li>
+                                                <li><a href="{% url 'login' %}">Login</a></li>
                                                 <li><a href="{% url 'register' %}">Sign Up</a></li>
                                             </ul>
                                         {% endif %}

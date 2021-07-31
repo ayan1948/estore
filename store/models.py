@@ -19,7 +19,7 @@ class Product(models.Model):
     title = models.CharField(max_length=30)
     serialNo = models.CharField(max_length=50)
     price = models.FloatField()
-    screen = models.IntegerField()
+    screen = models.FloatField()
     processor = models.CharField(max_length=50)
     ram = models.IntegerField()
     storage = models.CharField(max_length=10)

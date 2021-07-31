@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <!--================Cart Area =================-->
+    <section class="cart_area section_padding">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in object.items.all %} {# Many to Many field hence .all is written #}
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="{{ order.item.image.url }}" alt="{{ product.item.serialNo }}"/>
+                                        </div>
+                                        <div class="media-body">
+                                            <p>{{ order.item.title }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>Rs {{ order.item.price }}</h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <a href="{% url 'decrement-from-cart' order.item.slug %}">
+                                            <i class="fa fa-minus mr-2" style="color: #2a2a2a"></i>
+                                        </a>
+                                        {{ order.quantity }}
+                                        <a href="{% url 'add-to-cart' order.item.slug %}">
+                                            <i class="fas fa-plus ml-2" style="color: #2a2a2a"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>Rs {{ order.get_total_item_price }}</h5>
+                                </td>
+                                <td>
+                                    <a href="{% url 'remove-from-cart' order.item.slug %}">
+                                        <i class="fa fa-trash float-right" style="color: #2a2a2a"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="5">Your cart is empty</td>
+                            </tr>
+                            <div class="checkout_btn_inner float-right">
+                                <a class="btn_1" href="{% url 'store-home' %}">Continue Shopping</a>
+                            </div>
+                        {% endfor %}
+                        {% if object.get_total %}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <h5>Subtotal</h5>
+                                </td>
+                                <td>
+                                    <h5>{{ object.get_total }}</h5>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                    {% if object.get_total %}
+                        <div class="checkout_btn_inner float-right">
+                            <a class="btn_1" href="{% url 'store-home' %}">Continue Shopping</a>
+                            <a class="btn_1 checkout_btn_1" href="{% url 'checkout' %}">Proceed to checkout</a>
+                        </div>
+                    {% else %}
+                        <div class="checkout_btn_inner float-right">
+                            <a class="btn_1" href="{% url 'store-home' %}">Continue Shopping</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+<!--================End Cart Area =================-->

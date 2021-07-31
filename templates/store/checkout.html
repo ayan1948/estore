@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <section class="checkout_area section_padding">
+        <div class="container">
+            <div class="billing_details">
+                <form method="POST" class="row">
+                    {% csrf_token %}
+                    <div class="col-lg-8">
+                        <h3>Shipping Details</h3>
+                        <div class="row contact_form">
+                            {% for non_field_error in form.non_field_errors %}
+                                <div class="invalid-feedback">
+                                    <span>{{ non_field_error }}</span>
+                                </div>
+                            {% endfor %}
+                            {% for field in form %}
+                                <div class="col-md-12 form-group">
+                                    {{ field }}
+                                    {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                            <span>{{ error }}</span>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Your Order</h2>
+                            <ul class="list">
+                                <li>
+                                    <a class="font-weight-bold">Product
+                                        <span class="font-weight-bold">Total</span>
+                                    </a>
+                                </li>
+                                {% for order in object.items.all %}
+                                <li>
+                                    <a>{{ order.item.title }}
+                                        <span class="middle">x {{ order.quantity }}</span>
+                                        <span class="last">Rs {{ order.get_total_item_price }}</span>
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <ul class="list list_2">
+                                <li>
+                                    <a>Subtotal
+                                        <span>Rs {{ object.get_total }}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>Shipping
+                                        <span>Flat rate: Rs 50</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>Total
+                                        <span id="total"></span>
+                                    </a>
+                                    <script>
+                                        const total = JSON.parse('{{ object.get_total }}')
+                                        document.getElementById("total").innerHTML = "Rs " +  (total + 50).toString()
+                                    </script>
+                                </li>
+                            </ul>
+                            <button class="btn_3" type="submit" value="submit">Proceed to Pay</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

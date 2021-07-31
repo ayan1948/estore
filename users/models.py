@@ -17,4 +17,4 @@ class ShippingAddress(models.Model):
     zip = models.CharField(max_length=6)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Address'
