@@ -6,8 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from .forms import CheckoutForm
 from django.utils import timezone
-from .models import Product, Order, OrderItem
-from users.models import ShippingAddress
+from .models import Product, Order, OrderItem, ShippingAddress
 
 
 def home(request):
@@ -28,7 +27,7 @@ class CheckoutView(View):
         return render(self.request, "store/checkout.html", context)
 
     def post(self, *args, **kwargs):
-        form = CheckoutForm(self.request.POST)
+        form = CheckoutForm(self.request.POST or None)
         try:
             order = Order.objects.get(user=self.request.user, is_ordered=False)
             if form.is_valid() and form.cleaned_data.get('save_info'):

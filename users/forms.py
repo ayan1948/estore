@@ -29,6 +29,12 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username', 'email']
+        labels = {
+            'first_name': 'Firstname',
+            'last_name': 'Lastname',
+            'username': 'Username',
+            'email': 'Email'
+        }
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'single-input'}),
             'last_name': forms.TextInput(attrs={'class': 'single-input'}),
@@ -41,6 +47,9 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['phone']
+        labels = {
+            'phone': 'Phone Number'
+        }
         widgets = {
             'phone': forms.NumberInput(attrs={'class': 'single-input'})
         }

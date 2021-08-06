@@ -10,7 +10,7 @@ class Profile(models.Model):
         return f'{self.user.username} Profile'
 
 
-class ShippingAddress(models.Model):
+class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
     city = models.CharField(max_length=20)
