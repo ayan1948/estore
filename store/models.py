@@ -94,10 +94,10 @@ class OrderItem(models.Model):
 
 
 class ShippingAddress(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    street_address = models.CharField(max_length=100)
-    city = models.CharField(max_length=20)
-    zip = models.CharField(max_length=6)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    street_address = models.CharField(max_length=100, null=True)
+    city = models.CharField(max_length=20, null=True)
+    zip = models.CharField(max_length=6, null=True)
 
     def __str__(self):
         return f'{self.user} Address'
