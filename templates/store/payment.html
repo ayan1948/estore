@@ -1,31 +1,29 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load static %}
+
+{% block headerElement %}
+    <link rel="stylesheet" href={% static "css/payment.css" %}>
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
 {% block content %}
     <section class="checkout_area section_padding">
         <div class="container">
             <div class="billing_details">
-                <form method="POST" class="row">
-                    {% csrf_token %}
+                <div class="row">
                     <div class="col-lg-8">
-                        <h3>Shipping Details</h3>
-                        <div class="row contact_form">
-                            {% for non_field_error in form.non_field_errors %}
-                                <div class="invalid-feedback">
-                                    <span>{{ non_field_error }}</span>
-                                </div>
-                            {% endfor %}
-                            {% for field in form %}
-                                <div class="col-md-12 form-group">
-                                    {{ field.label_tag }}
-                                    {{ field }}
-                                    {% for error in field.errors %}
-                                        <div class="invalid-feedback">
-                                            <span>{{ error }}</span>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            {% endfor %}
-                        </div>
+                        <form id="payment-form">
+                            <div id="card-element"></div>
+                            <button class="paymentBTN" id="submit">
+                                <div class="spinner hidden" id="spinner"></div>
+                                <span id="button-text">Pay now</span>
+                            </button>
+                            <p id="card-error" role="alert"></p>
+                            <p class="result-message hidden">
+                                Payment succeeded, see the result in your
+                                <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+                            </p>
+                        </form>
                     </div>
                     <div class="col-lg-4">
                         <div class="order_box">
@@ -37,15 +35,15 @@
                                     </a>
                                 </li>
                                 {% for order in object.items.all %}
-                                <li>
-                                    <a>{{ order.item.title }}
-                                        <span class="middle">x {{ order.quantity }}</span>
-                                        <span class="last">Rs {{ order.get_total_item_price }}</span>
-                                    </a>
-                                </li>
+                                    <li>
+                                        <a>{{ order.item.title }}
+                                            <span class="middle">x {{ order.quantity }}</span>
+                                            <span class="last">Rs {{ order.get_total_item_price }}</span>
+                                        </a>
+                                    </li>
                                 {% endfor %}
                             </ul>
-                            <ul class="list list_2" style="padding-bottom: 20px">
+                            <ul class="list list_2">
                                 <li>
                                     <a>Subtotal
                                         <span>Rs {{ object.get_total }}</span>
@@ -62,15 +60,15 @@
                                     </a>
                                     <script>
                                         const total = JSON.parse('{{ object.get_total }}')
-                                        document.getElementById("total").innerHTML = "Rs " +  (total + 50).toString()
+                                        document.getElementById("total").innerHTML = "Rs " + (total + 50).toString()
                                     </script>
                                 </li>
                             </ul>
-                            <button class="btn_3" type="submit" value="submit">Proceed to Pay</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </section>
+    <script src={% static "js/client.js" %}></script>
 {% endblock %}

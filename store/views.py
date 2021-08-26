@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
@@ -7,6 +8,9 @@ from django.views.generic import ListView, DetailView, View
 from .forms import CheckoutForm
 from django.utils import timezone
 from .models import Product, Order, OrderItem, ShippingAddress
+import stripe
+import json
+# stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def home(request):
@@ -27,12 +31,15 @@ class CheckoutView(View):
         return render(self.request, "store/checkout.html", context)
 
     def post(self, *args, **kwargs):
-        form = CheckoutForm(self.request.POST or None)
         try:
             order = Order.objects.get(user=self.request.user, is_ordered=False)
-            if form.is_valid() and form.cleaned_data.get('save_info'):
+            form = CheckoutForm(self.request.POST)
+            if form.is_valid():
                 form.save()
-                order.shipping_address = ShippingAddress.objects.filter(user=self.request.user)[-1]
+                addr = ShippingAddress.objects.last()
+                addr.user = self.request.user
+                order.shipping_address = addr
+                addr.save()
                 order.save()
                 return redirect("payment")
             messages.error(self.request, "Failed Checkout")
@@ -41,6 +48,22 @@ class CheckoutView(View):
             messages.error(self.request, "You do not have an active order")
             return redirect("cart")
 
+
+class PaymentView(View):
+    def get(self, *args, **kwargs):
+        order = Order.objects.get(user=self.request.user, is_ordered=False)
+        context = {
+            'object': order
+        }
+        return render(self.request, "store/payment.html", context)
+
+    def post(self, *args, **kwargs):
+        data = json.loads(self.request.data)
+        order = Order.objects.get(user=self.request.user, is_ordered=False)
+        intent = stripe.PaymentIntent.create(
+            amount=order.get_total(),
+            currency='inr'
+        )
 
 class AllProductsView(ListView):
     model = Product
