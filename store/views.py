@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
@@ -9,8 +10,8 @@ from .forms import CheckoutForm
 from django.utils import timezone
 from .models import Product, Order, OrderItem, ShippingAddress
 import stripe
-import json
-# stripe.api_key = settings.STRIPE_SECRET_KEY
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def home(request):
@@ -57,13 +58,16 @@ class PaymentView(View):
         }
         return render(self.request, "store/payment.html", context)
 
-    def post(self, *args, **kwargs):
-        data = json.loads(self.request.data)
-        order = Order.objects.get(user=self.request.user, is_ordered=False)
-        intent = stripe.PaymentIntent.create(
-            amount=order.get_total(),
-            currency='inr'
-        )
+
+def payment_intent(request):
+    order = Order.objects.get(user=request.user, is_ordered=False)
+    intent = stripe.PaymentIntent.create(
+        amount=int(order.get_total() + 50),
+        currency='inr'
+    )
+    order.is_ordered = True
+    return JsonResponse({'clientSecret': intent['client_secret']}, safe=True)
+
 
 class AllProductsView(ListView):
     model = Product

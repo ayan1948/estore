@@ -133,3 +133,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'store-home'
 LOGIN_URL = 'login'
+STRIPE_SECRET_KEY = 'sk_test_51JSyprSEzYdi2c7xTphP5PU3LPCBqPrTZUJt3s7sXbVGWotOBR7TOjerj6O52KOkBCaE0uQDOOWvfgnqkDNfwHV200ZmEBUSC0'
