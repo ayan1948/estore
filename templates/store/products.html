@@ -86,26 +86,21 @@
                 </div>
                 <div class="col-md-9">
                     <div class="product_list">
-                        <div class="col-lg-6 col-sm-6">
-                            {% for product in object_list %}
-                                <a class="media single_product_item" href="{{ product.get_absolute_url }}">
-                                    <img class="mr-3" src="{{ product.image.url }}" alt="{{ product.serialNo }}">
-                                    <a class="media-body">
-                                        <div class="article-metadata">
-                                            <a class="mr-2" href="#">{{ product.title }}</a>
-                                        </div>
-                                        <h2>{{ product.title }}</h2>
-                                        <p class="article-content">Processor: {{ product.processor }}
-                                            Ram: {{ product.ram }} GB,
-                                            Storage: {{ product.storage }} GB,
-                                            Operating System: {{ product.OS }},
-                                            Screen: {{ product.screen }} inches,
-                                            Color: {{ product.color }}
-                                        </p>
-                                    </a>
+                        {% for product in object_list %}
+                            <div class="col-lg-6 col-sm-6">
+                                <a class="single_product_item" href="{{ product.get_absolute_url }}">
+                                    <img class="img-fluid" src="{{ product.image.url }}" alt="{{ product.serialNo }}">
+                                    <h3>{{ product.title }}</h3>
+                                    <p class="article-content">Processor: {{ product.processor }}
+                                        Ram: {{ product.ram }} GB,
+                                        Storage: {{ product.storage }} GB,
+                                        Operating System: {{ product.OS }},
+                                        Screen: {{ product.screen }} inches,
+                                        Color: {{ product.color }}
+                                    </p>
                                 </a>
-                            {% endfor %}
-                        </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

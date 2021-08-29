@@ -34,8 +34,8 @@ class Product(models.Model):
     def save(self):
         super().save()
         img = Image.open(self.image.path)
-        if img.height > 400 or img.width > 400:
-            img.thumbnail((400, 400))
+        if img.height > 403 or img.width > 370:
+            img.thumbnail((370, 403))
             img.save(self.image.path)
 
     def get_absolute_url(self):

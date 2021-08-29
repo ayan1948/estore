@@ -52,8 +52,7 @@ fetch("/create-payment-intent/")
 // prompt the user to enter authentication details without leaving your page.
 const payWithCard = function (stripe, card, clientSecret) {
     loading(true);
-    stripe
-        .confirmCardPayment(clientSecret, {
+    stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card
             }

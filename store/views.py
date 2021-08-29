@@ -16,7 +16,8 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def home(request):
     context = {
-        'products': Product.objects.all()
+        'products': Product.objects.all(),
+        'title': 'Home'
     }
     return render(request, 'store/index.html', context)
 
@@ -27,7 +28,8 @@ class CheckoutView(View):
         form = CheckoutForm()
         context = {
             'form': form,
-            'object': order
+            'object': order,
+            'title': 'Checkout'
         }
         return render(self.request, "store/checkout.html", context)
 
@@ -54,7 +56,8 @@ class PaymentView(View):
     def get(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, is_ordered=False)
         context = {
-            'object': order
+            'object': order,
+            'title': 'Payment'
         }
         return render(self.request, "store/payment.html", context)
 
@@ -62,11 +65,22 @@ class PaymentView(View):
 def payment_intent(request):
     order = Order.objects.get(user=request.user, is_ordered=False)
     intent = stripe.PaymentIntent.create(
-        amount=int(order.get_total() + 50),
-        currency='inr'
+        amount=int((order.get_total() + 50) * 100),
+        currency='inr',
     )
-    order.is_ordered = True
     return JsonResponse({'clientSecret': intent['client_secret']}, safe=True)
+
+
+class SummaryView(View):
+    def get(self, *args, **kwargs):
+        order = Order.objects.get(user=self.request.user, is_ordered=False)
+        order.is_ordered = True
+        order.save()
+        context = {
+            'object': order,
+            'title': 'Order Confirmation'
+        }
+        return render(self.request, "store/order-summary.html", context)
 
 
 class AllProductsView(ListView):
@@ -83,6 +97,16 @@ class ProductCategory(ListView):
     def get_queryset(self, **kwargs):
         return Product.objects.filter(category=self.kwargs['category'])
 
+    def get_context_data(self, **kwargs):
+        context = super(ProductCategory, self).get_context_data(**kwargs)
+        lookup = {
+            'L': 'Laptops',
+            'S': 'Smartphones',
+            'A': 'Accessories'
+        }
+        context['title'] = lookup[self.kwargs['category']]
+        return context
+
 
 class ProductDetailView(DetailView):
     model = Product
@@ -94,7 +118,8 @@ class CartView(LoginRequiredMixin, View):
         try:
             order = Order.objects.get(user=self.request.user, is_ordered=False)
             context = {
-                'object': order
+                'object': order,
+                'title': 'Cart'
             }
             return render(self.request, 'store/cart.html', context)
         except ObjectDoesNotExist:
