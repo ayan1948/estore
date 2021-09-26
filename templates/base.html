@@ -78,7 +78,7 @@
                                 <!-- Logo -->
                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-3">
                                     <div class="logo">
-                                      <a href="store/index.html"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                                      <a href={% url 'store-home' %}<img src="{% static 'img/logo/logo.png' %}" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-8 col-md-7 col-sm-5">
@@ -102,7 +102,12 @@
                                                     <i class="fas fa-search special-tag"></i>
                                                 </div>
                                             </div>
-                                         </li>
+                                        </li>
+                                        <li>
+                                            <div class="shopping-card">
+                                                <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>
+                                            </div>
+                                        </li>
                                         <li>
                                             <div class="shopping-card">
                                                 <a href="{% url 'cart' %}"><i class="fas fa-shopping-cart"></i></a>

@@ -10,6 +10,8 @@ from .forms import CheckoutForm
 from django.utils import timezone
 from .models import Product, Order, OrderItem, ShippingAddress
 import stripe
+import json
+import os
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -100,12 +102,26 @@ class ProductCategory(ListView):
     def get_context_data(self, **kwargs):
         context = super(ProductCategory, self).get_context_data(**kwargs)
         lookup = {
-            'L': 'Laptops',
-            'S': 'Smartphones',
-            'A': 'Accessories'
+            'L': 'Laptop',
+            'S': 'Smartphone',
+            'A': 'Accessory'
         }
-        context['title'] = lookup[self.kwargs['category']]
+        # context['title'] = lookup[self.kwargs['category']]
+        # file = f"./store/filters/{context['title']}.json"
+        # if self.kwargs['category'] != 'A':
+        #     with open(file) as f:
+        #         context['filter'] = json.load(f)
         return context
+
+
+class ProductFilter(View):
+    def get(self, *args, **kwargs):
+        order = Order.objects.get(user=self.request.user, is_ordered=False)
+        context = {
+            'object': order,
+            'title': 'Payment'
+        }
+        return JsonResponse()
 
 
 class ProductDetailView(DetailView):
@@ -187,3 +203,8 @@ def decrement_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order")
     return redirect("cart")
+
+
+# def search(request, word):
+#     # fields = [f for f in Product._meta.fields if isinstance(f, CharField)]
+#     # queries = [Q(**{word.name: word}) for f in fields]

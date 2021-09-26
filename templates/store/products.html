@@ -12,76 +12,18 @@
                                 <i class="ti-search"></i>
                             </form>
                         </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list" id="brand">Brand<i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">Lenovo</a></p>
-                                    <p><a href="#">Asus</a></p>
-                                    <p><a href="#">HP</a></p>
-                                    <p><a href="#">Acer</a></p>
+                        {% for key, value in filter.items %}
+                            <div class="single_sedebar">
+                                <div class="select_option">
+                                    <div class="select_option_list">{{ key }}<i class="right fas fa-caret-down"></i></div>
+                                    <div class="select_option_dropdown">
+                                        {% for element in value %}
+                                            <p><a href="#">{{ element }}</a></p>
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list" id="processor">Processor<i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">Core i7</a></p>
-                                    <p><a href="#">Core i5</a></p>
-                                    <p><a href="#">Core i3</a></p>
-                                    <p><a href="#">Pentium</a></p>
-                                    <p><a href="#">Ryzen 7</a></p>
-                                    <p><a href="#">Ryzen 5</a></p>
-                                    <p><a href="#">Ryzen 3</a></p>
-                                    <p><a href="#">Atlon</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list" id="ram">RAM<i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">4 GB</a></p>
-                                    <p><a href="#">8 GB</a></p>
-                                    <p><a href="#">12 GB</a></p>
-                                    <p><a href="#">16 GB</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list" id="storage">Storage<i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">128 GB SSD</a></p>
-                                    <p><a href="#">256 GB SSD</a></p>
-                                    <p><a href="#">512 GB SSD</a></p>
-                                    <p><a href="#">1 TB SSD</a></p>
-                                    <p><a href="#">500 GB HDD</a></p>
-                                    <p><a href="#">1 TB HDD</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list" id="screen">Screen Size<i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">13.3 inches</a></p>
-                                    <p><a href="#">14 inches</a></p>
-                                    <p><a href="#">15.6 inches</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_sedebar">
-                            <div class="select_option">
-                                <div class="select_option_list" id="screen">Price<i class="right fas fa-caret-down"></i> </div>
-                                <div class="select_option_dropdown">
-                                    <p><a href="#">13.3 inches</a></p>
-                                    <p><a href="#">14 inches</a></p>
-                                    <p><a href="#">15.6 inches</a></p>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="col-md-9">

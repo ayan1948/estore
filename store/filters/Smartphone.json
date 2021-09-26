@@ -1,0 +1,64 @@
+{
+  "Brands": [
+    [0,"Oppo"],
+    [1,"Vivo"],
+    [2,"Xiaomi"],
+    [3,"Samsung"],
+    [4,"OnePlus"]
+  ],
+  "Processor": [
+    [0,"Snapdragon"],
+    [1,"Exynos"],
+    [2,"HiSilicon"],
+    [3,"Bionic"],
+    [4,"MediaTek"]
+  ],
+  "RAM": [
+    [0,"12 GB"],
+    [1,"8 GB"],
+    [2,"6 GB"],
+    [3,"4 GB"],
+    [4,"3 GB"],
+    [5,"2 GB"]
+  ],
+  "Storage": [
+    [0,"1 TB"],
+    [1,"512 GB"],
+    [2,"256 GB"],
+    [3,"128 GB"],
+    [4,"64 GB"],
+    [5,"32 GB"],
+    [6,"16 GB"]
+  ],
+  "Operating System": [
+    [0,"Android"],
+    [1,"IOS"]
+  ],
+  "Screen Size": [
+    [0,"4-4.4 inches"],
+    [1,"4.5-4.9 inches"],
+    [2,"5-5.4 inches"],
+    [3,"5.5-above inches"]
+  ],
+  "Price": [
+    [0,"Below Rs 7000"],
+    [1,"Rs 7000 - Rs 20000"],
+    [2,"Rs 20000 - Rs 34000"],
+    [3,"Rs 34000 - Rs 45000"],
+    [4,"Above Rs 45000"]
+  ],
+  "Back Camera": [
+    [0, "Below 4MP"],
+    [1, "4MP - 12MP"],
+    [2, "13MP - 24MP"],
+    [3, "24MP - 32MP"],
+    [4, "Above 32MP"]
+  ],
+  "Front Camera": [
+    [0, "Below 4MP"],
+    [1, "4MP - 12MP"],
+    [2, "13MP - 24MP"],
+    [3, "24MP - 32MP"],
+    [4, "Above 32MP"]
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "Brands": [
+    [0,"HP"],
+    [1,"Lenovo"],
+    [2,"Asus"],
+    [3,"Acer"],
+    [4,"Dell"]
+  ],
+  "Processor": [
+    [0,"Core i7"],
+    [1,"Core i5"],
+    [2,"Core i3"],
+    [3,"Pentium"],
+    [4,"Ryzen 7"],
+    [5,"Ryzen 5"],
+    [6,"Ryzen 3"],
+    [7,"Athlon"]
+  ],
+  "RAM": [
+    [0,"16 GB"],
+    [1,"12 GB"],
+    [2,"8 GB"],
+    [3,"4 GB"]
+  ],
+  "Storage": [
+    [0,"1 TB SSD"],
+    [1,"512 GB SSD"],
+    [2,"256 GB SSD"],
+    [3,"128 GB SSD"],
+    [4,"2 TB HDD"],
+    [5,"1 TB HDD"],
+    [6,"500 GB HDD"]
+  ],
+  "Operating System": [
+    [0,"Windows"],
+    [1,"Free-DOS"]
+  ],
+  "Screen Size": [
+    [0,"15.6 inches"],
+    [1,"14 inches"],
+    [2,"13.3 inches"]
+  ],
+  "Graphics": [
+    [0, "Nvidia RTX 30 Series"],
+    [1, "Nvidia RTX 20 Series"],
+    [2, "Nvidia GTX 16 Series"],
+    [3, "Nvidia MX Series"],
+    [4, "AMD Radeon Pro"],
+    [5, "AMD Radeon RX"],
+    [6, "Integrated Intel"],
+    [7, "Integrated AMD"]
+  ],
+  "Color": [
+    [0,"Black"],
+    [1,"Silver"],
+    [2,"Blue"],
+    [3,"Red"]
+  ],
+  "Price":[
+    [0,"Below Rs 20000"],
+    [1,"Rs 20000 - Rs 30000"],
+    [2,"Rs 30000 - Rs 40000"],
+    [3,"Rs 40000 - Rs 50000"],
+    [4,"Above Rs 50000"]
+  ]
+}

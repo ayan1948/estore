@@ -5,6 +5,8 @@ from PIL import Image
 from django.shortcuts import reverse
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+import json
+import os
 
 CATEGORY_CHOICES = (
     ('L', 'Laptop'),
@@ -12,24 +14,21 @@ CATEGORY_CHOICES = (
     ('A', 'Accessories')
 )
 
+files = os.listdir("./store/filters")
+filters = {}
+for file in files:
+    with open(f"./store/filters/{file}") as f:
+        filters[file] = json.load(f)
+
 
 class Product(models.Model):
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=1)
     title = models.CharField(max_length=30)
-    serialNo = models.CharField(max_length=50)
+    serialNo = models.CharField(max_length=50, blank=True)
     price = models.FloatField()
-    screen = models.FloatField()
-    processor = models.CharField(max_length=50)
-    ram = models.IntegerField()
-    storage = models.CharField(max_length=10)
-    OS = models.CharField(max_length=10)
-    graphics = models.CharField(max_length=10, null=True)
-    color = models.CharField(max_length=10)
-    frontcamera = models.CharField(max_length=10, blank=True)
-    backcamera = models.CharField(max_length=10, blank=True)
-    specifications = models.TextField(blank=True)
     slug = models.SlugField(unique=True, blank=True)
     image = models.ImageField(default='default.jpg', upload_to='product_images')
+    description = models.TextField(blank=True, null=True)
 
     def save(self):
         super().save()
@@ -55,6 +54,38 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Laptop(models.Model):
+    brand = models.CharField(choices=filters['Laptop.json']['Brands'])
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
+    screen = models.FloatField()
+    processor = models.CharField(choices=filters['Laptop.json']['Processor'])
+    ram = models.IntegerField(choices=filters['Laptop.json']['RAM'])
+    storage = models.CharField(choices=filters['Laptop.json']['Storage'])
+    OS = models.CharField(choices=filters['Laptop.json']['Operating System'])
+    graphics = models.CharField(choices=filters['Laptop.json']['Graphics'])
+    color = models.CharField(choices=filters['Laptop.json']['Color'])
+    fingerprint = models.BooleanField(default=False)
+    touchscreen = models.BooleanField(default=False)
+
+
+class Smartphone(models.Model):
+    brand = models.CharField(choices=filters['Smartphone.json']['Brands'])
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
+    screen = models.FloatField(choices=filters['Smartphone.json']['Processor'])
+    processor = models.CharField(choices=filters['Smartphone.json']['Processor'])
+    ram = models.IntegerField(choices=filters['Smartphone.json']['RAM'])
+    storage = models.CharField(choices=filters['Smartphone.json']['Storage'])
+    OS = models.CharField(choices=filters['Smartphone.json']['Operating System'])
+    color = models.CharField(choices=filters['Smartphone.json']['Color'])
+    frontcamera = models.CharField(choices=filters['Smartphone.json']['Front Camera'])
+    backcamera = models.CharField(choices=filters['Smartphone.json']['Back Camera'])
+
+
+class Accessory(models.Model):
+    brand = models.CharField(choices=filters['Accessory.json']['Brands'])
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
 
 
 def create_slug(instance, new_slug=None):

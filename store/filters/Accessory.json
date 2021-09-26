@@ -1,0 +1,14 @@
+{
+  "Brands": [
+    [0, "Logitech"],
+    [1, "Belkin"],
+    [2, "Xiaomi"],
+    [3, "Lenovo"],
+    [4, "Asus"],
+    [5, "Samsung"],
+    [6, "HP"],
+    [7, "Microsoft"],
+    [8, "Western Digital"],
+    [9, "Seagate"]
+  ]
+}
