@@ -57,35 +57,44 @@ class Product(models.Model):
 
 
 class Laptop(models.Model):
-    brand = models.CharField(choices=filters['Laptop.json']['Brands'])
+    brand = models.IntegerField(choices=filters['Laptop.json']['Brands'], default=None)
     product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
-    screen = models.FloatField()
-    processor = models.CharField(choices=filters['Laptop.json']['Processor'])
-    ram = models.IntegerField(choices=filters['Laptop.json']['RAM'])
-    storage = models.CharField(choices=filters['Laptop.json']['Storage'])
-    OS = models.CharField(choices=filters['Laptop.json']['Operating System'])
-    graphics = models.CharField(choices=filters['Laptop.json']['Graphics'])
-    color = models.CharField(choices=filters['Laptop.json']['Color'])
+    screen = models.FloatField(default=None)
+    processor = models.IntegerField(choices=filters['Laptop.json']['Processor'], default=None)
+    ram = models.IntegerField(choices=filters['Laptop.json']['RAM'], default=None)
+    storage = models.IntegerField(choices=filters['Laptop.json']['Storage'], default=None)
+    OS = models.IntegerField(choices=filters['Laptop.json']['Operating System'], default=None)
+    graphics = models.IntegerField(choices=filters['Laptop.json']['Graphics'], default=None)
+    color = models.IntegerField(choices=filters['Laptop.json']['Color'], default=None)
     fingerprint = models.BooleanField(default=False)
     touchscreen = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.product.title
+
 
 class Smartphone(models.Model):
-    brand = models.CharField(choices=filters['Smartphone.json']['Brands'])
+    brand = models.IntegerField(choices=filters['Smartphone.json']['Brands'], default=None)
     product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
-    screen = models.FloatField(choices=filters['Smartphone.json']['Processor'])
-    processor = models.CharField(choices=filters['Smartphone.json']['Processor'])
-    ram = models.IntegerField(choices=filters['Smartphone.json']['RAM'])
-    storage = models.CharField(choices=filters['Smartphone.json']['Storage'])
-    OS = models.CharField(choices=filters['Smartphone.json']['Operating System'])
-    color = models.CharField(choices=filters['Smartphone.json']['Color'])
-    frontcamera = models.CharField(choices=filters['Smartphone.json']['Front Camera'])
-    backcamera = models.CharField(choices=filters['Smartphone.json']['Back Camera'])
+    screen = models.FloatField(default=None)
+    processor = models.IntegerField(choices=filters['Smartphone.json']['Processor'], default=None)
+    ram = models.IntegerField(choices=filters['Smartphone.json']['RAM'], default=None)
+    storage = models.IntegerField(choices=filters['Smartphone.json']['Storage'], default=None)
+    OS = models.IntegerField(choices=filters['Smartphone.json']['Operating System'], default=None)
+    color = models.IntegerField(choices=filters['Smartphone.json']['Color'], default=None)
+    frontcamera = models.IntegerField(choices=filters['Smartphone.json']['Front Camera'], default=None)
+    backcamera = models.IntegerField(choices=filters['Smartphone.json']['Back Camera'], default=None)
+
+    def __str__(self):
+        return self.product.title
 
 
 class Accessory(models.Model):
-    brand = models.CharField(choices=filters['Accessory.json']['Brands'])
+    brand = models.CharField(choices=filters['Accessory.json']['Brands'], max_length=1, default="-----")
     product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
+
+    def __str__(self):
+        return self.product.title
 
 
 def create_slug(instance, new_slug=None):
@@ -146,3 +155,6 @@ class Order(models.Model):
         for item in self.items.all():
             total += item.get_final_price()
         return total
+
+    def __str__(self):
+        return self.ordered_date

@@ -32,7 +32,14 @@
   ],
   "Operating System": [
     [0,"Android"],
-    [1,"IOS"]
+    [1,"IOS"],
+    [2, "Tizen"]
+  ],
+  "Color": [
+    [0,"Black"],
+    [1,"Silver"],
+    [2,"Blue"],
+    [3,"Red"]
   ],
   "Screen Size": [
     [0,"4-4.4 inches"],
