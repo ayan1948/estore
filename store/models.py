@@ -52,6 +52,9 @@ class Product(models.Model):
             'slug': self.slug
         })
 
+    class Meta:
+        db_table = 'Products'
+
     def __str__(self):
         return self.title
 
@@ -69,6 +72,9 @@ class Laptop(models.Model):
     fingerprint = models.BooleanField(default=False)
     touchscreen = models.BooleanField(default=False)
 
+    class Meta:
+        db_table = 'Laptops'
+
     def __str__(self):
         return self.product.title
 
@@ -85,13 +91,19 @@ class Smartphone(models.Model):
     frontcamera = models.IntegerField(choices=filters['Smartphone.json']['Front Camera'], default=None)
     backcamera = models.IntegerField(choices=filters['Smartphone.json']['Back Camera'], default=None)
 
+    class Meta:
+        db_table = 'Smartphones'
+
     def __str__(self):
         return self.product.title
 
 
 class Accessory(models.Model):
-    brand = models.CharField(choices=filters['Accessory.json']['Brands'], max_length=1, default="-----")
+    brand = models.IntegerField(choices=filters['Accessory.json']['Brands'], default=None)
     product = models.OneToOneField(Product, on_delete=models.CASCADE, primary_key=True)
+
+    class Meta:
+        db_table = 'Accessories'
 
     def __str__(self):
         return self.product.title
