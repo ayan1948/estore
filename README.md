@@ -4,12 +4,5 @@ The project tackles the implementation of an ecommerce store using various libra
 ## Goals
 **Goals**
 
-The main goal of the project is to act as a playground for learning advanced Rust language features by applying them in practice. The project should be extensive enough to facilitate learning about Rust's module system and how to properly organize code in a large project.
-
-**Non-goals**
-
-This emulator does NOT attempt:
-* To be the most accurate emulator
-* To be the highest performance emulator
-* To have stable implementation or interface
+The main goal of the project is to act as a playground for learning Django, and it's ORM features by applying them in practice.
 
